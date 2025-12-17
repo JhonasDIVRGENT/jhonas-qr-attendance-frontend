@@ -1,0 +1,29 @@
+/* =========================
+   ADMIN DASHBOARD LAYOUT
+========================= */
+
+.center-screen {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.admin-panel {
+  width: 100%;
+  max-width: 520px;
+  padding: 40px;
+  text-align: center;
+}
+
+.admin-info {
+  margin: 20px 0 30px;
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+.admin-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}

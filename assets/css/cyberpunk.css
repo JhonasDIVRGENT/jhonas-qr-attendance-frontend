@@ -1,0 +1,41 @@
+.terminal {
+  max-width: 500px;
+  margin: 80px auto;
+  padding: 30px;
+  border: 2px solid var(--neon);
+  box-shadow: 0 0 20px var(--neon);
+  text-align: center;
+}
+
+h1 {
+  color: var(--neon);
+  text-shadow: 0 0 10px var(--neon);
+}
+
+select {
+  width: 100%;
+  padding: 10px;
+  background: black;
+  color: var(--neon);
+  border: 1px solid var(--neon);
+}
+
+#qrContainer {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px dashed var(--neon);
+}
+#qrContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+.btn-neon.danger {
+  border-color: #ff4d4d;
+  color: #ff4d4d;
+}
+
+.btn-neon.danger:hover {
+  box-shadow: 0 0 15px #ff4d4d;
+}
