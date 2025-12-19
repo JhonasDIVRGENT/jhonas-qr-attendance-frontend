@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Escanear QR</title>
+
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/cyberpunk.css">
+</head>
+<body>
+
+<main class="dashboard">
+  <header class="dashboard-header">
+    <h1>📷 Escanear QR</h1>
+    <p class="subtitle">Marca tu asistencia</p>
+  </header>
+
+  <section class="card">
+    <div id="videoContainer" style="
+      width:100%;
+      max-width:500px;
+      margin:1rem auto;
+      position:relative;
+      border-radius:12px;
+      overflow:hidden;
+      background:transparent;
+    ">
+      <video id="video" style="width:100%; height:auto; display:block; border-radius:12px;"></video>
+      <canvas id="canvas" style="display:none;"></canvas>
+      
+      <!-- Marco de escaneo animado -->
+      <div style="
+        position:absolute;
+        top:50%;
+        left:50%;
+        transform:translate(-50%, -50%);
+        width:280px;
+        height:280px;
+        border:2px solid rgba(0,255,225,0.5);
+        border-radius:16px;
+        pointer-events:none;
+        animation: pulse 2s ease-in-out infinite;
+      ">
+        <!-- Esquinas decorativas mejoradas -->
+        <div style="position:absolute; top:-3px; left:-3px; width:40px; height:40px; border-top:4px solid #00ffe1; border-left:4px solid #00ffe1; border-radius:16px 0 0 0; box-shadow: 0 0 15px rgba(0,255,225,0.8);"></div>
+        <div style="position:absolute; top:-3px; right:-3px; width:40px; height:40px; border-top:4px solid #00ffe1; border-right:4px solid #00ffe1; border-radius:0 16px 0 0; box-shadow: 0 0 15px rgba(0,255,225,0.8);"></div>
+        <div style="position:absolute; bottom:-3px; left:-3px; width:40px; height:40px; border-bottom:4px solid #00ffe1; border-left:4px solid #00ffe1; border-radius:0 0 0 16px; box-shadow: 0 0 15px rgba(0,255,225,0.8);"></div>
+        <div style="position:absolute; bottom:-3px; right:-3px; width:40px; height:40px; border-bottom:4px solid #00ffe1; border-right:4px solid #00ffe1; border-radius:0 0 16px 0; box-shadow: 0 0 15px rgba(0,255,225,0.8);"></div>
+        
+        <!-- Línea de escaneo animada -->
+        <div style="
+          position:absolute;
+          top:0;
+          left:0;
+          right:0;
+          height:3px;
+          background:linear-gradient(90deg, transparent, #00ffe1, transparent);
+          box-shadow:0 0 20px #00ffe1;
+          animation:scanLine 2s linear infinite;
+        "></div>
+        
+        <!-- Ícono QR en el centro -->
+        <div style="
+          position:absolute;
+          top:50%;
+          left:50%;
+          transform:translate(-50%, -50%);
+          font-size:48px;
+          opacity:0.3;
+          animation:qrIcon 1.5s ease-in-out infinite;
+        ">📱</div>
+        
+        <!-- Instrucción flotante -->
+        <div style="
+          position:absolute;
+          top:-45px;
+          left:50%;
+          transform:translateX(-50%);
+          background:rgba(0,255,225,0.15);
+          backdrop-filter:blur(10px);
+          padding:8px 16px;
+          border-radius:20px;
+          border:1px solid rgba(0,255,225,0.4);
+          color:#00ffe1;
+          font-size:13px;
+          font-weight:500;
+          white-space:nowrap;
+          animation:floatInstruction 2s ease-in-out infinite;
+        ">📷 Coloca el QR aquí</div>
+      </div>
+    </div>
+
+    <style>
+      @keyframes pulse {
+        0%, 100% { 
+          box-shadow: 0 0 20px rgba(0,255,225,0.4);
+          border-color: rgba(0,255,225,0.5);
+        }
+        50% { 
+          box-shadow: 0 0 40px rgba(0,255,225,0.8);
+          border-color: rgba(0,255,225,0.9);
+        }
+      }
+      
+      @keyframes scanLine {
+        0% { top: 0; }
+        100% { top: 100%; }
+      }
+      
+      @keyframes qrIcon {
+        0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+        50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.1); }
+      }
+      
+      @keyframes floatInstruction {
+        0%, 100% { transform: translateX(-50%) translateY(0); }
+        50% { transform: translateX(-50%) translateY(-5px); }
+      }
+    </style>
+
+    <div style="text-align:center; margin:1.5rem 0;">
+      <button id="startBtn" class="btn" style="margin:0.5rem; background:linear-gradient(135deg, #00ffe1, #0088cc); box-shadow:0 4px 15px rgba(0,255,225,0.4); border:none;">📷 Iniciar Cámara</button>
+      <button id="stopBtn" class="btn" style="margin:0.5rem; display:none; background:linear-gradient(135deg, #ff4444, #cc0000); box-shadow:0 4px 15px rgba(255,68,68,0.4); border:none;">⏹️ Detener</button>
+      <button id="uploadBtn" class="btn" style="margin:0.5rem; background:linear-gradient(135deg, #00ffe1, #00cc88); box-shadow:0 4px 15px rgba(0,255,225,0.3); border:none;">📁 Subir Foto QR</button>
+    </div>
+    
+    <input type="file" id="fileInput" accept="image/*" capture="environment" style="display:none;" />
+
+    <p id="status" style="text-align:center; margin-top:1rem; font-weight:bold; font-size:1.2rem; color:#00ffe1;"></p>
+    
+    <div id="logs" style="
+      max-width:500px;
+      margin:1.5rem auto;
+      padding:1rem;
+      background:rgba(0,15,30,0.8);
+      border-radius:8px;
+      border:1px solid rgba(0,255,225,.3);
+      max-height:200px;
+      overflow-y:auto;
+      font-family:monospace;
+      font-size:0.85rem;
+    ">
+      <div style="color:#00ffe1; margin-bottom:0.5rem; font-weight:bold;">📋 Log de Actividad:</div>
+      <div id="logContent" style="color:#0ff;"></div>
+    </div>
+  </section>
+</main>
+
+<!-- ZXing - Librería más robusta para QR -->
+<script src="https://unpkg.com/@zxing/library@latest/umd/index.min.js"></script>
+
+<!-- Script principal -->
+<script type="module" src="../assets/js/user/scan.js"></script>
+</body>
+</html>

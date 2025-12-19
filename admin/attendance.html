@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Asistencias · Admin</title>
+
+  <link rel="stylesheet" href="../assets/css/base.css" />
+  <link rel="stylesheet" href="../assets/css/layout.css" />
+  <link rel="stylesheet" href="../assets/css/cyberpunk.css" />
+</head>
+<body>
+
+<main class="dashboard">
+  <header class="dashboard-header">
+    <h1>📊 ASISTENCIAS</h1>
+    <p class="subtitle">Registros y reportes por reunión</p>
+  </header>
+
+  <!-- Selector de reunión -->
+  <section class="card">
+    <label for="meetingSelect">Selecciona una reunión</label>
+    <select id="meetingSelect"></select>
+  </section>
+
+  <!-- Reporte -->
+  <section id="reportBox" class="card" style="display:none"></section>
+
+  <!-- Lista de asistencias -->
+  <section id="attendanceList"></section>
+
+  <footer class="dashboard-footer">
+    <a href="dashboard.html" class="btn ghost">← Volver</a>
+  </footer>
+</main>
+
+<script type="module" src="../assets/js/admin/attendance.js"></script>
+</body>
+</html>

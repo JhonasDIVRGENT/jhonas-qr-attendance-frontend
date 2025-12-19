@@ -10,35 +10,36 @@
   <link rel="stylesheet" href="../assets/css/cyberpunk.css">
 </head>
 <body>
+  <main class="dashboard">
+    <header class="dashboard-header">
+      <h1>⚡ ADMIN DASHBOARD</h1>
+      <p class="subtitle">Panel de control · QR Attendance</p>
+    </header>
 
-  <main class="center-screen">
-    <section class="card neon-border admin-panel">
-
-      <h1 class="neon-text">⚡ ADMIN DASHBOARD</h1>
-      <p class="subtitle">Panel de control</p>
-
-      <div class="admin-info">
-        <p id="adminName">Administrador</p>
-      </div>
-
-      <div class="admin-actions">
-
-        <a href="meeting.html" class="btn-neon">
-          📅 Crear / Ver Reuniones
-        </a>
-
-        <a href="attendance.html" class="btn-neon">
-          📊 Ver Asistencias
-        </a>
-
-        <button id="logoutBtn" class="btn-neon danger">
-          🚪 Cerrar sesión
-        </button>
-
-      </div>
-
+    <section class="admin-info">
+      <span class="role">Administrador</span>
     </section>
+
+    <section class="dashboard-actions">
+      <a href="meeting.html" class="card">
+        📅
+        <h3>Reuniones</h3>
+        <p>Crear y gestionar sesiones</p>
+      </a>
+
+      <a href="attendance.html" class="card">
+        📊
+        <h3>Asistencias</h3>
+        <p>Ver registros y reportes</p>
+      </a>
+    </section>
+
+   <footer class="dashboard-footer">
+    <button class="btn ghost" id="logoutBtn">Cerrar sesión</button>
+  </footer>
   </main>
 
+  
+  <script type="module" src="../assets/js/admin/dashboard.js"></script>
 </body>
 </html>

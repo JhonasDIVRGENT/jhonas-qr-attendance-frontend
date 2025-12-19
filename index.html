@@ -1,25 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>QR Attendance</title>
+  <title>QR Asistencia · Pantalla</title>
+
   <link rel="stylesheet" href="../assets/css/base.css">
   <link rel="stylesheet" href="../assets/css/layout.css">
   <link rel="stylesheet" href="../assets/css/cyberpunk.css">
 </head>
+
 <body>
 
-  <div class="terminal">
-    <h1>⚡ QR ASISTENCIA</h1>
+  <main class="home-container">
 
-    <p>Selecciona una reunión</p>
+    <section class="home-card">
+      <h1>⚡ QR ASISTENCIA</h1>
+      <p class="subtitle">Pantalla pública de registro</p>
 
-    <select id="meetingSelect"></select>
+      <div class="field">
+        <label>Reunión activa</label>
+        <select id="meetingSelect"></select>
+      </div>
 
-    <div id="qrContainer"></div>
+      <div id="qrContainer" class="qr-box"></div>
 
-  </div>
+      <div class="home-actions">
+        <a href="../auth/login.html" class="btn ghost">
+          🔐 Ingresar al sistema
+        </a>
+      </div>
+    </section>
+
+  </main>
+
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
- <script type="module" src="assets/js/qr.js"></script>
+  <script type="module" src="../assets/js/qr.js"></script>
+
 </body>
 </html>

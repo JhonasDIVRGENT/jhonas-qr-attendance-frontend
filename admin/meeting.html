@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Reuniones · Admin</title>
+
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/cyberpunk.css">
+</head>
+<body>
+
+<main class="dashboard">
+  <header class="dashboard-header">
+    <h1>📅 REUNIONES</h1>
+    <p class="subtitle">Gestión de sesiones</p>
+  </header>
+
+  <!-- Crear reunión -->
+  <section class="card">
+    <h3>Crear nueva reunión</h3>
+
+    <form id="meetingForm">
+      <input type="text" id="title" placeholder="Título de la reunión" required>
+      <input type="datetime-local" id="startTime" required>
+      <input type="number" id="duration" placeholder="Duración (min)" required>
+
+      <button class="btn primary" type="submit">Crear</button>
+    </form>
+  </section>
+
+  <!-- Lista -->
+  <section class="card">
+    <h3>Reuniones creadas</h3>
+    <div id="meetingList"></div>
+  </section>
+
+  <footer class="dashboard-footer">
+    <a href="dashboard.html" class="btn ghost">← Volver</a>
+  </footer>
+</main>
+<!-- Modal editar reunión -->
+<div id="editModal" class="modal hidden">
+
+  <div class="modal-content">
+    <h3>Editar reunión</h3>
+
+    <label>Título</label>
+    <input type="text" id="editTitle">
+
+    <label>Fecha y hora</label>
+    <input type="datetime-local" id="editStartTime">
+
+    <label>Duración (min)</label>
+    <input type="number" id="editDuration">
+
+    <label>Estado</label>
+    <select id="editActive">
+      <option value="true">🟢 Activa</option>
+      <option value="false">🔴 Cerrada</option>
+    </select>
+
+    <div style="margin-top:1rem; display:flex; gap:.5rem; justify-content:flex-end;">
+      <button class="btn ghost" onclick="closeModal()">Cancelar</button>
+      <button class="btn primary" onclick="saveEdit()">Guardar</button>
+    </div>
+  </div>
+
+</div>
+
+
+<script type="module" src="../assets/js/admin/meeting.js"></script>
+</body>
+</html>

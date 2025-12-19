@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Resultado asistencia</title>
+
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/cyberpunk.css">
+</head>
+<body>
+
+<main class="dashboard">
+  <header class="dashboard-header">
+    <h1>✅ Asistencia registrada</h1>
+  </header>
+
+  <section class="card" id="result"></section>
+
+  <footer class="dashboard-footer">
+    <a href="scan.html" class="btn ghost">Escanear otra vez</a>
+  </footer>
+</main>
+
+<script>
+  const data = JSON.parse(localStorage.getItem('attendanceResult'));
+  const result = document.getElementById('result');
+
+  if (!data) {
+    result.innerHTML = '<p>Error al mostrar resultado</p>';
+  } else {
+    result.innerHTML = `
+      <h3>${data.student_name || 'Usuario'}</h3>
+      <p>${data.meeting || ''}</p>
+      <p>${data.time || ''}</p>
+      <p>${data.status || 'OK'}</p>
+    `;
+  }
+</script>
+
+</body>
+</html>

@@ -1,29 +1,260 @@
-/* =========================
-   ADMIN DASHBOARD LAYOUT
-========================= */
+/* ======================================================
+   GLOBAL / BASE
+   Estilos generales que aplican a todo el sitio
+====================================================== */
 
-.center-screen {
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #0b0f1a, #05010d);
+  color: #e6fefe;
+  font-family: var(--font-body);
+}
+
+/* ======================================================
+   HOME / INDEX / LANDING
+   index.html y pantalla pública principal
+====================================================== */
+
+.home-container {
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.admin-panel {
-  width: 100%;
+.home-card {
   max-width: 520px;
-  padding: 40px;
+  width: 100%;
+  padding: 3.5rem 3rem;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.45);
+  border-radius: 20px;
+  border: 1px solid rgba(0, 255, 225, 0.3);
+  box-shadow: 0 0 40px rgba(0, 255, 225, 0.15);
+}
+
+.home-card h1 {
+  font-family: var(--font-title);
+  color: #00ffe1;
+  margin-bottom: 1rem;
+}
+
+.home-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* ======================================================
+   TEXTOS COMUNES
+   Subtítulos reutilizados en varias pantallas
+====================================================== */
+
+.subtitle {
+  opacity: 0.75;
+  margin-bottom: 3rem;
+}
+
+/* ======================================================
+   BOTONES (REUTILIZABLES)
+====================================================== */
+
+.btn {
+  padding: 0.9rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.btn.primary {
+  background: #00ffe1;
+  color: #05010d;
+}
+
+.btn.primary:hover {
+  box-shadow: 0 0 25px rgba(0, 255, 225, 0.7);
+}
+
+.btn.ghost {
+  border: 1px solid rgba(0, 255, 225, 0.4);
+  color: #00ffe1;
+}
+
+.btn.ghost:hover {
+  background: rgba(0, 255, 225, 0.08);
+}
+
+/* ======================================================
+   DASHBOARD ADMIN
+====================================================== */
+
+.dashboard {
+  max-width: 900px;
+  margin: auto;
+  padding: 4rem 2rem;
   text-align: center;
 }
 
-.admin-info {
-  margin: 20px 0 30px;
-  font-size: 1.1rem;
-  opacity: 0.9;
+.dashboard-header h1 {
+  font-family: var(--font-title);
+  color: #00ffe1;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
 }
 
-.admin-actions {
+.admin-info {
+  margin-bottom: 3rem;
+}
+
+.role {
+  padding: 0.4rem 1rem;
+  border: 1px solid #00ffe1;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  color: #00ffe1;
+}
+
+.dashboard-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+}
+
+.dashboard-footer {
+  margin-top: 4rem;
+}
+
+/* ======================================================
+   CARDS (REUTILIZABLES)
+   Usadas en dashboard, listados, etc.
+====================================================== */
+
+.card {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(0, 255, 225, 0.3);
+  border-radius: 16px;
+  padding: 2rem;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 25px rgba(0, 255, 225, 0.4);
+}
+
+.card h3 {
+  font-family: var(--font-title);
+  margin-top: 1rem;
+  color: #00ffe1;
+}
+
+.card p {
+  opacity: 0.7;
+  font-size: 0.9rem;
+}
+
+/* ======================================================
+   LOGOUT / ACCIONES PELIGRO
+====================================================== */
+
+#logoutBtn {
+  background: transparent;
+  border: 1px solid #ff4d6d;
+  color: #ff4d6d;
+  padding: 0.6rem 1.5rem;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+#logoutBtn:hover {
+  background: #ff4d6d;
+  color: #05010d;
+}
+
+/* ======================================================
+   QR / PANTALLA PÚBLICA
+====================================================== */
+
+.qr-box {
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 255, 225, 0.4);
   display: flex;
-  flex-direction: column;
-  gap: 18px;
+  justify-content: center;
+}
+
+/* =========================
+   Modal moderno
+========================= */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at top, rgba(0,255,200,0.08), rgba(0,0,0,0.85));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: linear-gradient(180deg, #0b0b0b, #050505);
+  border: 1px solid rgba(0,255,200,0.25);
+  border-radius: 14px;
+  padding: 1.5rem;
+  width: 360px;
+  box-shadow:
+    0 0 25px rgba(0,255,200,0.15),
+    inset 0 0 20px rgba(0,255,200,0.05);
+}
+
+.modal-content h3 {
+  text-align: center;
+  color: #6fffe9;
+  margin-bottom: 1rem;
+}
+
+.modal-content label {
+  display: block;
+  font-size: 0.85rem;
+  color: #aaa;
+  margin-top: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.modal-content input,
+.modal-content select {
+  width: 100%;
+  background: #0f0f0f;
+  border: 1px solid rgba(0,255,200,0.25);
+  color: #eaeaea;
+  padding: 0.55rem 0.6rem;
+  border-radius: 8px;
+  outline: none;
+}
+
+.modal-content input:focus,
+.modal-content select:focus {
+  border-color: #6fffe9;
+  box-shadow: 0 0 8px rgba(0,255,200,0.4);
+}
+
+
+.card {
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 18px rgba(0,255,200,0.12);
 }

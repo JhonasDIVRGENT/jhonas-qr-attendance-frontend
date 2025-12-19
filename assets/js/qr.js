@@ -29,8 +29,8 @@ select.addEventListener('change', async () => {
     text: data.token,
     width: 420,
     height: 420,
-    colorDark: '#00ffe1',
-    colorLight: '#05010d',
+    colorDark: '#000000',      // Negro puro para máxima compatibilidad
+    colorLight: '#ffffff',     // Blanco puro
     correctLevel: QRCode.CorrectLevel.H
   });
 });
